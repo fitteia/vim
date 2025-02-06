@@ -33,8 +33,16 @@ function DOPLUS()
 	let new_line = substitute(here,'DO \d\+',printf('DO %d',num1+1),'')
 	call setline('.',new_line)
 endfunction
+
+function COMPILE()
+	let filename = expand("%")
+	write
+	execute '! gfortran -O2 -fpic -c ' . filename  ' %'
+endfunction
+
 nnoremap <Leader>c :call CONTINUE1()<CR>
 nnoremap <Leader>cc :call CONTINUE2()<CR>
 nnoremap <Leader>- :call DOMINUS()<CR>
 nnoremap <Leader>+ :call DOPLUS()<CR>
+nnoremap <Leader>f :call COMPILE()<CR>
 

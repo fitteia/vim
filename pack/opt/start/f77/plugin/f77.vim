@@ -37,12 +37,23 @@ endfunction
 function COMPILE()
 	let filename = expand("%")
 	write
-	execute '! gcc -O2 -fpic -c ' . filename 
+	execute '! gcc -O3 -fpic -c ' . filename 
+endfunction
+
+function TEST()
+	let filename = expand("%")
+	write
+"	execute '! gcc -O3 -fpic -c ' . filename 
+	execute '! make' 
+	execute '! cp libminuit.a ~/.local/OneFit-Engine/lib/'
+	execute '! cd ~/public_html/ && onefite fit "Mz(x,a,b,t)=a\+b*exp(-x/t)" zone12.dat --logx --autox --ssz=0.2'
+   execute '! cd ~/public_html/ && diff ofe-tmp/fit1.log /tmp'	
 endfunction
 
 nnoremap <Leader>d :call CONTINUE1()<CR>
 nnoremap <Leader>dd :call CONTINUE2()<CR>
 nnoremap <Leader>- :call DOMINUS()<CR>
 nnoremap <Leader>+ :call DOPLUS()<CR>
+nnoremap <Leader>t :call TEST()<CR>
 nnoremap <Leader>gcc :call COMPILE()<CR>
 

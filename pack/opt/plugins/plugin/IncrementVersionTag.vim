@@ -11,7 +11,7 @@ function! IncrementVersionTag()
         \ 'html': '<!--',
         \ 'perl': '#',
         \ 'raku': '#',
-        \ 'f': '*',
+        \ 'fortran': '*',
         \}[&filetype]
 	
 "    call append(line('$'),&filetype . comment_char)
@@ -25,7 +25,7 @@ function! IncrementVersionTag()
         \ 'javascript': '',
         \ 'perl': '',
         \ 'raku': '',
-        \ 'f': '*',
+        \ 'fortran': '',
  	\ 'html': ' -->',
         \}[&filetype]
 
@@ -67,14 +67,13 @@ function! IncrementVersionTag()
     endif
 
     " Write updated lines back to the file
-    call writefile(lines, expand('%'))
+	 call setline(1,lines)
+"    call writefile(lines, expand('%'))
 endfunction
 
-" run as command:
-command! AddVersion call IncrementVersionTag()
+function! TagWhenWrite()
+	call IncrementVersionTag()
+endfunction
 
-" Automatically run on file save
-autocmd BufWritePost * call IncrementVersionTag()
-
-nnoremap <Leader>v :call IncrementVersionTag()
-" vim 2025-01-30 1.0.2
+nnoremap <Leader>v :call IncrementVersionTag()<CR>
+" vim 2025-01-30 1.0.290

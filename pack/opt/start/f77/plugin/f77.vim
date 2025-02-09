@@ -53,4 +53,3 @@ nnoremap <Leader>- :call DOMINUS()<CR>
 nnoremap <Leader>+ :call DOPLUS()<CR>
 nnoremap <Leader>t :call TEST()<CR>
 nnoremap <Leader>gcc :call COMPILE()<CR>
-
